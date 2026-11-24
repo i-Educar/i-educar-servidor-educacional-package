@@ -1,0 +1,31 @@
+{
+    "name": "buriti/i-educar-servidor-educacional-package",
+    "description": "Servidor educacional (TR 5.1) para o i-Educar 2.12.",
+    "version": "0.1.0",
+    "type": "library",
+    "license": "GPL-2.0-or-later",
+    "keywords": ["ieducar", "buriti", "laguna"],
+    "authors": [{"name": "Buriti"}],
+    "require": {
+        "php": ">=8.3",
+        "illuminate/support": "^11.0|^12.0|^13.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "iEducar\\Packages\\BuritiServidorEducacional\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "iEducar\\Packages\\BuritiServidorEducacional\\Providers\\ServidorEducacionalServiceProvider"
+            ]
+        },
+        "ieducar": {
+            "compatible": ["2.12"]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
