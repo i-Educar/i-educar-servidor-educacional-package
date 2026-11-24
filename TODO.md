@@ -2,6 +2,13 @@
 
 > Pacote: `buriti/i-educar-servidor-educacional-package` · TR **5.1** · Prioridade **P0**
 
+
+## Onda 2 (código inicial 2026-11-24)
+
+- [x] Services de domínio + testes
+- [x] docs/onda-2/
+- [ ] Migrations/UI completas
+
 ## Backlog Laguna
 
 - [ ] Matriz 5.1.x × telas atuais do servidor
