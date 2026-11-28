@@ -21,19 +21,21 @@ concurrency:
   group: deploy-laguna-${{ github.repository }}
   cancel-in-progress: false
 
+# Write de git (bump/tag) fica no LAGUNA_DEPLOY_TOKEN dentro do reusable.
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   deploy:
-    uses: i-Educar/i-educar-laguna-ambiente-package/.github/workflows/reusable-deploy-laguna.yml@main
+    # Bump de versão do CI committa com [skip ci] — evita loop de deploy.
+    if: ${{ github.event_name != 'push' || !contains(github.event.head_commit.message, '[skip ci]') }}
+    # Pin por SHA (docs/laguna/deploys/REUSABLE_PIN) — nunca @main.
+    uses: i-Educar/i-educar-laguna-ambiente-package/.github/workflows/reusable-deploy-laguna.yml@11b586a2ca04bcdae5af0162f8f522fb00b2ca3f
     with:
-      package_repo: ${{ github.event.repository.name }}
-      # Em push: sempre testes + migrate do pacote. Em dispatch: segue os inputs (default true).
+      package_repo: i-educar-servidor-educacional-package
+      server_path: packages/buriti/i-educar-servidor-educacional-package
+      environment: laguna-production
       run_tests: ${{ github.event_name == 'push' || github.event.inputs.run_tests == 'true' }}
       run_migrate: ${{ github.event_name == 'push' || github.event.inputs.run_migrate == 'true' }}
-    secrets:
-      LAGUNA_SSH_HOST: ${{ secrets.LAGUNA_SSH_HOST }}
-      LAGUNA_SSH_USER: ${{ secrets.LAGUNA_SSH_USER }}
-      LAGUNA_SSH_KEY: ${{ secrets.LAGUNA_SSH_KEY }}
-      LAGUNA_APP_PATH: ${{ secrets.LAGUNA_APP_PATH }}
+    # Herda org/repo secrets; secrets do Environment aplicam no job do reusable.
+    secrets: inherit
