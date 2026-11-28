@@ -1,0 +1,9 @@
+{
+  "package": "i-educar-servidor-educacional-package",
+  "composer": "buriti/i-educar-servidor-educacional-package",
+  "version": "0.2.1",
+  "sha": "pending",
+  "full_sha": "pending",
+  "deployed_at": "2026-11-28T17:32:29Z",
+  "source": "github-actions"
+}
